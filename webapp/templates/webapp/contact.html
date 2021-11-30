@@ -1,0 +1,68 @@
+{% extends 'webapp/basic.html' %}
+{% block title %} Contact Us {% endblock %}
+{% block body %}
+{% load static %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-rose alert-with-icon tp-5" id="msg" data-notify="container">
+    <i class="material-icons" data-notify="icon">notifications</i>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="material-icons">close</i>
+    </button>
+    <span data-notify="message"> {{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-8 col-12  mr-auto ml-auto">
+            <div class="card center ">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">rate_review</i>
+                    </div>
+                    <h4 class="card-title text-primary"><b>Contact us</b></h4>
+                </div>
+                <div class="card-body ">
+                    <div class="row justify-content-center">
+                        <div class="input-group form-control-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="material-icons">code</i>
+                                </span>
+                            </div>
+                            <div class="form-group has-default col-md-9">
+                                <label class="form-label">Develope By : Uptricks Services </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="input-group form-control-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="material-icons">mail_outline</i>
+                                </span>
+                            </div>
+                            <div class="form-group has-default col-md-9">
+                                <label class="form-label">Email : Uptricks Services </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="input-group form-control-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="material-icons">contact_phone</i>
+                                </span>
+                            </div>
+                            <div class="form-group has-default col-md-9">
+                                <label class="form-label">Contact : 9999999999 </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

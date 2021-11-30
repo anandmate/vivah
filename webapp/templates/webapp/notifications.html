@@ -1,0 +1,41 @@
+{% extends 'webapp/basic.html' %}
+{% block title %} Notifications {% endblock %}
+{% block body %}
+{% load static %}
+<div class="container-sm mt-5">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-rose alert-with-icon tp-5" id="msg" data-notify="container">
+        <i class="material-icons" data-notify="icon">notifications</i>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="material-icons">close</i>
+        </button>
+        <span data-notify="message"> {{ message }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <h3 style="color:#DC143C; font-weight: bold;">Your notifications appear here!</h3>
+    {% if notify %}
+    {% for i in notify %}
+    <div class="alert alert-primary alert-with-icon mt-5" data-notify="container">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="material-icons">close</i>
+        </button>
+        <p>{{ i.Name }} shown interest in your profile!</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+<div class="container-sm mt-5">
+    {% if seen %}
+    {% for i in seen %}
+    <div class="alert alert-rose alert-with-icon mt-5" data-notify="container">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="material-icons">close</i>
+        </button>
+        <p>{{ i.Name }} viewed your profile!</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

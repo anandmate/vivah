@@ -1,0 +1,147 @@
+{% extends 'webapp/basic.html' %}
+{% block title %} Feedback {% endblock %}
+{% block body %}
+{% load static %}
+<style xmlns="http://www.w3.org/1999/html">
+    .txt-center {
+  text-align: center;
+}
+.hide {
+  display: none;
+}
+
+.clear {
+  float: none;
+  clear: both;
+}
+
+.rating {
+    width: 190px;
+    height: 50px;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+    position: relative;
+}
+
+.rating > label {
+    float: right;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    width: 2.1em;
+    height: 3.1em;
+    cursor: pointer;
+    color: #000;
+}
+
+.rating > label:hover,
+.rating > label:hover ~ label,
+.rating > input.radio-btn:checked ~ label {
+    color: transparent;
+}
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before,
+.rating > input.radio-btn:checked ~ label:before,
+.rating > input.radio-btn:checked ~ label:before {
+    content: "\2605";
+    position: absolute;
+    left: 0;
+    color: #FFD700;
+}
+
+</style>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-rose alert-with-icon tp-5" id="msg" data-notify="container">
+    <i class="material-icons" data-notify="icon">notifications</i>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="material-icons">close</i>
+    </button>
+    <span data-notify="message"> {{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-8 col-12  mr-auto ml-auto">
+            <div class="card center ">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">rate_review</i>
+                    </div>
+                    <h4 class="card-title align-center">Feedback Form</h4>
+                </div>
+                <div class="card-body mt-5 ">
+                    <form class="form-horizontal" action="feedback" method="POST">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-10 checkbox-radios">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        {% csrf_token %}
+                                        <input class="form-check-input" type="radio" name="feed" value="Bug" checked>
+                                        <i class="material-icons">bug_report</i>Bug
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="feed" value="Feedback" checked>
+                                        <i class="material-icons">rate_review</i>Feedback
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="feed" value="Other" checked>
+                                        <i class="material-icons">help_center</i>Others
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-3 col-form-label">Suggestions</label>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" name="Suggestion"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-4">
+                            <div class="rating">
+                                <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                                <label for="star5">☆</label>
+                                <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                                <label for="star4">☆</label>
+                                <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                                <label for="star3">☆</label>
+                                <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                                <label for="star2">☆</label>
+                                <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                                <label for="star1">☆</label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                </div>
+                <div class="card-footer ">
+                    <div class="row justify-content-center">
+                        <div class="col-md-5">
+                            <button type="submit" class="btn btn-fill btn-rose" onclick="demo.showSwal('success-message')">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,67 @@
+{% extends 'webapp/basic.html' %}
+{% block title %} Update Profile {% endblock %}
+{% block body %}
+{% load static %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-rose alert-with-icon tp-5" id="msg" data-notify="container">
+    <i class="material-icons" data-notify="icon">notifications</i>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="material-icons">close</i>
+    </button>
+    <span data-notify="message"> {{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Approval</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Approval</th>
+                                        <th>Member Type</th>
+                                        
+                                    </tr>
+                                </thead>
+                                {% for i in var %}
+                                <tbody>
+                                    <tr>
+                                        <td>{{i.candidate_id}}</td>
+                                        <td>{{i.Name}}</td>
+                                        <td>{{i.Approval}}</td>
+                                        <td>{{i.Member}}</td>
+                                        <td class="td-actions text-right">
+                                            <form action="approval_update" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="profile" value="{{i.candidate_id}}">
+                                                <button type="submit" class="btn btn-info ">
+                                                    <i class="material-icons">person</i> Edit
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

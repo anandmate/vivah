@@ -1,0 +1,56 @@
+{% extends 'webapp/basic.html' %}
+{% block title %} My Events {% endblock %}
+{% block body %}
+{% load static %}
+<!-- events display -->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-rose alert-with-icon tp-5" id="msg" data-notify="container">
+    <i class="material-icons" data-notify="icon">notifications</i>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="material-icons">close</i>
+    </button>
+    <span data-notify="message"> {{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+<div class="main">
+    <div class="header text-center mt-5">
+       <h3 style="color:#DC143C; font-weight: bold;">The events you registered for...</h3>
+    </div>
+     <div class="container mt-4">
+         <div class="row">
+             {% for i in myevents %}
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <a class="d-block blur-shadow-image">
+                                <img src="{{i.Image.url}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                            </a>
+                        </div>
+                        <h3 class="card-title">Event:-{{i.Name}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">info</i>
+                            <p class="mb-0">
+                                <b>Description:-</b>{{i.Description}}<br><br>
+                            </p>
+                        </div>
+                        <form action="event_detail" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="eventname" value="{{i.Name}}">
+                            <button class="btn btn-primary btn-round">
+                                <i class="material-icons">touch_app</i> Details
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+         </div>
+     </div>
+</div>
+<!--end events-->
+{% endblock %}

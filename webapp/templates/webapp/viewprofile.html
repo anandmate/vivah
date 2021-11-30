@@ -1,0 +1,474 @@
+{% extends 'webapp/basic.html' %}
+{% block title %} User Profile {% endblock %}
+{% block body %}
+{% load static %}
+<div class="row">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-rose alert-with-icon tp-5" id="msg" data-notify="container">
+        <i class="material-icons" data-notify="icon">notifications</i>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="material-icons">close</i>
+        </button>
+        <span data-notify="message"> {{ message }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="col-md-10 ml-auto mr-auto">
+        <div class="page-categories">
+            {% for i in candidates %}
+            <h3 class="title text-center">Profile of {{i.Name}}</h3>
+            <br />
+            <ul class="nav nav-pills nav-pills-rose nav-pills-icons justify-content-center" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#link7" role="tablist">
+                        <i class="material-icons">info</i> About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " data-toggle="tab" href="#link8" role="tablist">
+                        <i class="material-icons">perm_identity</i> Personal Info
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#link9" role="tablist">
+                        <i class="material-icons">contact_mail</i> Contact and Address
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#link10" role="tablist">
+                        <i class="material-icons">family_restroom</i> Family
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#link11" role="tablist">
+                        <i class="material-icons">volunteer_activism</i> Partner Expectations
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#link12" role="tablist">
+                        <i class="material-icons">collections</i> Gallery
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content tab-space tab-subcategories">
+                <div class="tab-pane active" id="link7">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 ">
+                                    <div class="picture-container">
+                                        <div class="picture">
+                                            <img src="{{i.Profile_pic.url}}" class="picture-src" id="wizardPicturePreview" style="width:300px;height:350px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Vivah Id:</label>
+                                        <div>{{i.candidate_id}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Full Name </label>
+                                        <div>{{i.Name}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group select-wizard">
+                                        <label style="color:#DC143C;">Gender</label>
+                                        <div>{{i.Gender}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Date Of Birth</label>
+                                        <div>{{i.DOB}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group select-wizard">
+                                        <label style="color:#DC143C;">Occupation Type</label>
+                                        <div>{{i.Occupation_type}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Occupation Details</label>
+                                        <div>{{i.Occupation_detail}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Education Title</label>
+                                        <div>{{i.Education_title}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Education Area</label>
+                                        <div>{{i.Education_area}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Hobbies</label>
+                                        <div>{{i.Hobby}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">About Me</label>
+                                        <div>{{i.About}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane " id="link8">
+                    <div class="card">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group ">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Marital Status</label>
+                                        <div>{{i.Marital_st}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Height in(ft)</label>
+                                        <div>{{i.Height}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group select-wizard">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Blood Group</label>
+                                        <div>{{i.Blood_group}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Birth Name</label>
+                                        <div>{{i.Birth_name}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Birth Time</label>
+                                        <div>{{i.Birth_time}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Birth Place</label>
+                                        <div>{{i.Birth_place}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Mother Tongue</label>
+                                        <div>{{i.Mother_tong}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Complexion </label>
+                                        <div>{{i.Complexion}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group select-wizard">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Annual Income</label>
+                                        <div>{{i.Annual_income}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">First Gotra</label>
+                                        <div>{{i.First_gotra}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Second Gotra</label>
+                                        <div>{{i.Second_gotra}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="link9">
+                    <div class="card">
+                        <div class="card-body ">
+                            <div class="row tp-5">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Address</label>
+                                        <div>{{i.Address}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">City</label>
+                                        <div>{{i.City}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Country</label>
+                                        <div>{{i.Country}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Postal Code</label>
+                                        <div>{{i.Postal_code}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Email Id</label>
+                                        <div>{{i.Email}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Phone Number 1</label>
+                                        <div>{{i.Contact_1}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Contact Name</label>
+                                        <div>{{i.Contact_1_name}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Relation</label>
+                                        <div>{{i.Contact_1_relation}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Phone Number 2</label>
+                                        <div>{{i.Contact_2}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Contact Name</label>
+                                        <div>{{i.Contact_2_name}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Relation</label>
+                                        <div>{{i.Contact_2_relation}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="link10">
+                    <div class="card">
+                        <div class="card-body ">
+                            <div class="row  tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Family Type </label>
+                                        <div>{{i.Family}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Father's Name</label>
+                                        <div>{{i.Fathers_name}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Father's Occupation</label>
+                                        <div>{{i.Fathers_occupation}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Mother's Occupation</label>
+                                        <div>{{i.Mothers_name}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Mother's Name</label>
+                                        <div>{{i.Mothers_occupation}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Number of Brothers</label>
+                                        <div>{{i.Number_brother}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Brothers Details</label>
+                                        <div>{{i.Brother_detail}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Number of Sisters</label>
+                                        <div>{{i.Number_sister}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Sisters Details</label>
+                                        <div>{{i.Sister_detail}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="link11">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Complextion</label>
+                                        <div>{{i.Partner_compx}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Occupation</label>
+                                        <div>{{i.Partner_occupation}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Prefered City</label>
+                                        <div>{{i.Preffered_city}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Min Age</label>
+                                        <div>{{i.Partner_agefrom}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Max Age</label>
+                                        <div>{{i.Partner_ageto}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="cbmd-label-floating" style="color:#DC143C;">Height Above</label>
+                                        <div>{{i.Partner_height}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tp-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Annual Icome</label>
+                                        <div>{{i.Partner_income}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating" style="color:#DC143C;">Qualification</label>
+                                        <div>{{i.Partner_qualification}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="link12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row tp-5">
+                                {% if all_img %}
+                                {% for i in all_img %}
+                                <div class="col-md-4">
+                                    <div class="fileinput-preview fileinput-exists thumbnail">
+                                        <img src="{{i.images.url}}" class="picture-src" id="wizardPicturePreview" style="width:250px;height:350px;">
+                                    </div>
+                                </div>
+                                {% endfor%}
+                                {% else %}
+                                <h6>No photos in gallery!</h6>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center tp-5">
+            <form action="favorite_profile" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="canview" value="{{i.candidate_id}}">
+                <button class="btn btn-primary btn-round btn-fab">
+                    <i class="material-icons">thumb_up</i>
+                </button>
+            </form>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <form action="export_profile" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="canview" value="{{i.candidate_id}}">
+                <button class="btn btn-primary btn-round btn-fab">
+                    <i class="material-icons">print</i>
+                </button>
+            </form>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-primary btn-round btn-fab">
+                <i class="material-icons">smartphone</i>
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

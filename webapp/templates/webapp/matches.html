@@ -1,0 +1,82 @@
+{% extends 'webapp/basic.html' %}
+{% block title %} Matches {% endblock %}
+{% block body %}
+{% load static %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-rose alert-with-icon tp-5" id="msg" data-notify="container">
+    <i class="material-icons" data-notify="icon">notifications</i>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="material-icons">close</i>
+    </button>
+    <span data-notify="message"> {{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+<div class="main">
+    <div class="container mt-4">
+        <div class="header text-center mt-5">
+            <h3 style="color:#DC143C; font-weight: bold;">Matches as per your preferences!</h3>
+        </div>
+        <div class="row">
+            {% for i in rec %}
+            <div class="col-sm-2.3 tp-4">
+                <div class="card card-product">
+                    <div class="card-header card-header-image" data-header-animation="true">
+                        <a href="#pablo">
+                            <img class="img" src="{{i.Profile_pic.url}}" style="width:170px;height:240px;">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions text-center">
+                            <form action="view_profile" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="canview" value="{{i.candidate_id}}">
+                                <button class="btn btn-rose btn-round">View Profile</button>
+                            </form>
+                        </div>
+                        <h6 class="card-category text-gray">Vivah ID- {{i.candidate_id}}</h6>
+                        <h5 class="card-title">Name:-{{ i.Name }}</h5>
+                        <div class="card-description">
+                            D.O.B.:-{{ i.DOB }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container mt-4"">
+        <div class=" header text-center mt-5">
+        <h3 style="color:#DC143C; font-weight: bold;">Matches as per your favorites...</h3>
+    </div>
+    <div class="row">
+        {% for i in rec2 %}
+        <div class="col-sm-2.3 tp-4">
+            <div class="card card-product">
+                <div class="card-header card-header-image" data-header-animation="true">
+                    <a href="#pablo">
+                        <img class="img" src="{{i.Profile_pic.url}}" style="width:170px;height:240px;">
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="card-actions text-center">
+                        <form action="view_profile" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="canview" value="{{i.candidate_id}}">
+                            <button class="btn btn-rose btn-round">View Profile</button>
+                        </form>
+                    </div>
+                    <h6 class="card-category text-gray">Vivah ID- {{i.candidate_id}}</h6>
+                    <h5 class="card-title">Name:-{{ i.Name }}</h5>
+                    <div class="card-description">
+                        D.O.B.:-{{ i.DOB }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock body %}

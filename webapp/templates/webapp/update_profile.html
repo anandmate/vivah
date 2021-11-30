@@ -1,0 +1,900 @@
+{% extends 'webapp/basic.html' %}
+{% block title %} Update Profile {% endblock %}
+{% block body %}
+{% load static %}
+<div class="row">
+    <div class="col-md-10 ml-auto mr-auto">
+        <div class="page-categories">
+            {% for i in data %}
+            <form action="update" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h3 class="title text-center">Update Profile</h3>
+                <br />
+                <ul class="nav nav-pills nav-pills-rose nav-pills-icons justify-content-center" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#link7" role="tablist">
+                            <i class="material-icons">info</i> About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="tab" href="#link8" role="tablist">
+                            <i class="material-icons">perm_identity</i> Personal Info
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#link9" role="tablist">
+                            <i class="material-icons">contact_mail</i> Contact and Address
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#link10" role="tablist">
+                            <i class="material-icons">family_restroom</i> Family
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#link11" role="tablist">
+                            <i class="material-icons">volunteer_activism</i> Partner Expectations
+                        </a>
+                    </li>
+                    
+                </ul>
+                <div class="tab-content tab-space tab-subcategories">
+                    <div class="tab-pane active" id="link7">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                <div class="fileinput-new thumbnail">
+                                                    <img src="{{i.Profile_pic.url}}" class="picture-src" id="wizardPicturePreview">
+                                                </div>
+                                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                <div>
+                                                    <span class="btn btn-rose btn-round btn-file">
+                                                        <span class="fileinput-new">Select image</span>
+                                                        <span class="fileinput-exists">Change</span>
+                                                        <input type="file" name="picture" >
+                                                    </span>
+                                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row tp-5">
+                                         <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating" style="color:#DC143C;">Vivah Id:</label><div>{{i.candidate_id}}</div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label style="color:#DC143C;">Full Name </label>
+                                                <input type="text" class="form-control" id="Name" placeholder="{{i.Name}}" name="Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group select-wizard">
+                                                <label style="color:#DC143C;">Gender</label>
+                                                <select class="selectpicker" data-style="select-with-transition" title="{{i.Gender}}" name="Gender">
+                                                    <option value="Male"> Male </option>
+                                                    <option value="Female"> Female </option>
+                                                    <option value="Others"> Others </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row tp-5">
+                                         <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label style="color:#DC143C;">Date Of Birth</label>
+                                                <input type="text" class="form-control datepicker" value="{{i.DOB}}" name="Dob">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group select-wizard">
+                                                <label style="color:#DC143C;">Occupation Type</label>
+                                                <select class="selectpicker" data-size="3" data-style="select-with-transition" title="{{i.Occupation_type}}" name="Occupation_type">
+                                                    <option value="-">-</option>
+                                                    <option value="Service"> Service </option>
+                                                    <option value="SelfEmployed"> Self Employed </option>
+                                                    <option value="private">Private</option>
+                                                    <option value="farmer">Farmer</option>
+                                                    <option value="Others"> Others </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label style="color:#DC143C;">Occupation Details</label>
+                                                <input type="text" class="form-control" id="Occupation" placeholder="{{i.Occupation_detail}}" name="Occupation_detail">
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row tp-5">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                               <label style="color:#DC143C;">Education Title</label>
+                                                <select class="selectpicker" data-size="5" data-style="select-with-transition" title="{{i.Education_title}}" name="Education_title">
+                                                    <option value="Bachelors"> Bachelors</option>
+                                                    <option value="Masters"> Masters </option>
+                                                    <option value="Doctorate">Doctorate</option>
+                                                    <option value="Diploma">Diploma</option>
+                                                    <option value="Undergraduate"> Undergraduate</option>
+                                                    <option value="AssociatesDegree">Associates Degree</option>
+                                                    <option value="Honours Degree">Honours Degree</option>
+                                                    <option value="Trade School"> Trade School</option>
+                                                    <option value="High School">High School</option>
+                                                    <option value="Less Than High School">Less Than High School</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                         <div class="col-md-4">
+                                            <div class="form-group">
+                                             <label style="color:#DC143C;">Education Area</label>
+                                                <select class="selectpicker" data-size="7"
+                                                        data-style="select-with-transition"
+                                                        title="{{i.Education_area}}" name="Education_area">
+                                                    <option value="Advertising/Marketing"> Advertising/Marketing</option>
+                                                    <option value="Administrative services"> Administrative services</option>
+                                                    <option value="Architecture">Architecture</option>
+                                                    <option value="Armed Force">Armed Force</option>
+                                                    <option value="Arts"> Arts</option>
+                                                    <option value="Commerce">Commerce </option>
+                                                    <option value="Computer/IT">Computer/IT</option>
+                                                    <option value="Education"> Education</option>
+                                                    <option value="Engineering/Technology">Engineering/Technology</option>
+                                                    <option value="Fashion">Fashion</option>
+                                                     <option value="Finace">Finace</option>
+                                                    <option value="Fine Arts"> Fine Arts</option>
+                                                    <option value="Home Science">Home Science</option>
+                                                    <option value="Law">Law</option>
+                                                    <option value="Managemant">Managemant</option>
+                                                    <option value="Medicine">Medicine</option>
+                                                    <option value="Nursing/Health Science">Nursing/Health Science</option>
+                                                     <option value="Office administration">Office administration</option>
+                                                    <option value="Science"> Science</option>
+                                                    <option value="Shipping">Shipping</option>
+                                                    <option value="Travel& Tourism">Travel& Tourism</option>
+                                                    <option value="Design"> Design</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label style="color:#DC143C;">Hobbies </label>
+                                                <input type="text" class="form-control" id="Hobby" placeholder="{{i.Hobby}}" name="Hobby">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="color:#DC143C;">About Me</label>
+                                                <textarea class="form-control" placeholder="{{i.About}}" name="About" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="link8">
+                        <div class="card">
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group select-wizard">
+                                            <label style="color:#DC143C;">Marital Status</label>
+                                            <select class="selectpicker" data-size="3" data-style="select-with-transition" title="{{i.Marital_St}}" name="Marital_st">
+                                                <option value="NeverMarried">Never Married</option>
+                                                <option value="Divorcee">Divorcee</option>
+                                                <option value="Widow">Widow</option>
+                                                <option value="Widower">Widower</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                           <label style="color:#DC143C;">Height</label>
+                                            <select class="selectpicker" data-size="7"
+                                                    data-style="select-with-transition" title="{{i.Height}}"
+                                                    name="Height">
+                                                <option value="4.5" >4' 5"(1.35mts)</option>
+                                                <option value="4.6">4' 6"(1.37mts)</option>
+                                                <option value="4.7">4' 7"(1.40mts)</option>
+                                                <option value="4.8">4' 8"(1.42mts)</option>
+                                                <option value="4.9">4' 9"(1.45mts)</option>
+                                                <option value="4.10">4' 10"(1.47mts)</option>
+                                                <option value="4.11">4' 11"(1.50mts)</option>
+                                                <option value="5.0">5' 0"(1.52mts)</option>
+                                                <option value="5.1">5' 1"(1.55mts)</option>
+                                                <option value="5.2">5' 2"(1.58mts)</option>
+                                                <option value="5.3">5' 3"(1.60mts)</option>
+                                                <option value="5.4">5' 4"(1.63mts)</option>
+                                                <option value="5.5">5' 5"(1.65mts)</option>
+                                                <option value="5.6">5' 6"(1.68mts)</option>
+                                                <option value="5.7">5' 7"(1.70mts)</option>
+                                                <option value="5.8">5' 8"(1.73mts)</option>
+                                                <option value="5.9">5' 9"(1.75mts)</option>
+                                                <option value="5.10">5' 10"(1.78mts)</option>
+                                                <option value="5.11">5' 11"(1.80mts)</option>
+                                                <option value="6.0">6' 0"(1.83mts)</option>
+                                                <option value="6.1">6' 1"(1.85mts)</option>
+                                                <option value="6.2">6' 2"(1.88mts)</option>
+                                                <option value="6.3">6' 3"(1.91mts)</option>
+                                                <option value="6.4">6' 4"(1.93mts)</option>
+                                                <option value="6.5">6' 5"(1.96mts)</option>
+                                                <option value="6.6">6' 6"(1.98mts)</option>
+                                                <option value="6.7">6' 7"(2.01mts)</option>
+                                                <option value="6.8">6' 8"(2.03mts)</option>
+                                                <option value="6.9">6' 9"(2.06mts)</option>
+                                                <option value="6.10">6' 10"(2.08mts)</option>
+                                                <option value="6.11">6' 11"(2.11mts)</option>
+                                                <option value="7.0">7' 0"(2.13mts) Plus</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group select-wizard">
+                                            <label style="color:#DC143C;">Blood Group</label>
+                                            <select class="selectpicker" data-size="7" data-style="select-with-transition" title="{{i.Blood_group}}" name="Blood_group">
+                                                <option value="A+">A+</option>
+                                                <option value="A-">A-</option>
+                                                <option value="B+">B+</option>
+                                                <option value="B-">B-</option>
+                                                <option value="AB+"> AB+</option>
+                                                <option value="AB-">AB-</option>
+                                                <option value="O+">O+</option>
+                                                <option value="O-">O-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Birth Name</label>
+                                            <input type="text" class="form-control" placeholder="{{i.Birth_name}}" name="Birth_name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Birth Time</label>
+                                            <input type="text" class="form-control timepicker" placeholder="{{i.Birth_time}}" name="Birth_time">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Birth Place</label>
+                                            <input type="text" class="form-control " placeholder="{{i.Birth_place}}" name="Birth_place">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Mother Tongue</label>
+                                            <input type="text" class="form-control" placeholder="{{i.Mother_tong}}" name="Mother_tong">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                                <label style="color:#DC143C;">Complexion</label>
+                                            <select class="selectpicker" data-size="7"
+                                                    data-style="select-with-transition" title="{{i.Complexion}}"
+                                                    name="Complexion">
+                                                <option value="Normal" >Normal</option>
+                                                <option value="Wheatish">Wheatish</option>
+                                                <option value="Fair">Fair</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group select-wizard">
+                                            <label style="color:#DC143C;">Annual Income</label>
+                                            <select class="selectpicker" data-size="7" data-style="select-with-transition" title="{{i.Annual_income}}" name="Annual_income">
+                                                <option value="-">-</option>
+                                                <option value="0-100000">0-100000</option>
+                                                <option value="100000-300000">100000-300000</option>
+                                                <option value="300000-500000">300000-500000</option>
+                                                <option value="500000-700000">500000-700000</option>
+                                                <option value="700000-900000">700000-900000</option>
+                                                <option value="900000-1100000">900000-1100000</option>
+                                                <option value="1100000-1300000">1100000-1300000</option>
+                                                <option value="1300000-1500000">1300000-1500000</option>
+                                                <option value="1500000-2000000">1500000-2000000</option>
+                                                <option value="2000000-2500000">2000000-2500000</option>
+                                                <option value="2500000 and above">2500000 and above</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">First Gotra</label>
+                                            <input type="text" class="form-control" placeholder="{{i.First_gotra}}" name="First_gotra">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Second Gotra</label>
+                                            <input type="text" class="form-control" placeholder="{{i.Second_gotra}}" name="Second_gotra">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="link9">
+                        <div class="card">
+                            <div class="card-body ">
+                                <div class="row tp-5">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Address</label>
+                                            <input type="text" class="form-control" placeholder="{{i.Address}}" name="Address">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">City</label>
+                                            <input type="text" class="form-control" name="City" placeholder="{{i.City}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Country</label>
+                                            <input type="text" class="form-control" name="Country" placeholder="{{i.Country}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Postal Code</label>
+                                            <input type="number" class="form-control" name="Postal_code" placeholder="{{i.Postal_code}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Email Id</label>
+                                            <input type="email" class="form-control" name="Email" placeholder="{{i.Email}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Phone Number 1</label>
+                                            <input type="number" min="1000000000" class="form-control" placeholder="{{i.Contact_1}}" onfocus="focused(this)" onfocusout="defocused(this)" name="contact_1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Contact Name</label>
+                                            <input type="text" class="form-control" name="contact1_name" placeholder="{{i.Contact_1_name}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Relation</label>
+                                            <select class="selectpicker" data-size="7" data-style="select-with-transition" title="{{i.Contact_1_relation}}" name="contact1_rel">
+                                                <option value="Self"> Self </option>
+                                                <option value="Father"> Father </option>
+                                                <option value="Mother"> Mother </option>
+                                                <option value="Brother"> Brother </option>
+                                                <option value="Sister"> Sister </option>
+                                                <option value="Uncle"> Uncle </option>
+                                                <option value="Aunty"> Aunty </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Phone Number 2</label>
+                                            <input type="number" min="1000000000" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" placeholder="{{i.Contact_2}}" name="contact_2">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Contact Name</label>
+                                            <input type="text" class="form-control" name="contact2_name" placeholder="{{i.Contact_2_name}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Relation</label>
+                                            <select class="selectpicker" data-size="7" data-style="select-with-transition" title="{{i.Contact_2_relation}}" name="contact2_rel">
+                                                <option value="Self"> Self </option>
+                                                <option value="Father"> Father </option>
+                                                <option value="Mother"> Mother </option>
+                                                <option value="Brother"> Brother </option>
+                                                <option value="Sister"> Sister </option>
+                                                <option value="Uncle"> Uncle </option>
+                                                <option value="Aunty"> Aunty </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="link10">
+                        <div class="card">
+                            <div class="card-body ">
+                                <div class="row  tp-5">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Family Type </label>
+                                            <input type="text" class="form-control" name="Family_type" placeholder="{{i.Family}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Father's Name</label>
+                                            <input type="text" class="form-control" name="fathers_name" placeholder="{{i.Fathers_name}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Father's Occupation</label>
+                                            <input type="text" class="form-control" name="father_occupation" placeholder="{{i.Fathers_occupation}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Mother's Name</label>
+                                            <input type="text" class="form-control" name="mother_name" placeholder="{{i.Mothers_name}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Mother's Occupation</label>
+                                            <input type="text" class="form-control" name="mother_occupation" placeholder="{{i.Mothers_occupation}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Number of Brothers</label>
+                                            <input type="number" min="0" class="form-control" name="number_brother" placeholder="{{i.Number_brother}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Brothers Details</label>
+                                            <input type="text" class="form-control" name="brother_detail" placeholder="{{i.Brother_detail}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Number of Sisters</label>
+                                            <input type="number" min="0" class="form-control" name="number_sister" placeholder="{{i.Number_sister}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Sisters Details</label>
+                                            <input type="text" class="form-control" name="sister_detail" placeholder="{{i.Sister_detail}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="link11">
+                        <div class="card">
+                            <div class="card-body ">
+                                <div class="row tp-5">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                           
+                                        <label style="color:#DC143C;">Complexion</label>
+                                            <select class="selectpicker" data-size="7"
+                                                    data-style="select-with-transition" title="{{i.partner_compx}}"
+                                                    name="partner_compx">
+                                                    <option value="Any">Any</option>
+                                                <option value="Normal" >Normal</option>
+                                                <option value="Wheatish">Wheatish</option>
+                                                <option value="Fair">Fair</option>
+                                            </select> 
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Occupation</label>
+                                            <input type="text" class="form-control " name="partner_occupation" placeholder="{{i.Partner_occupation}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Prefered City</label>
+                                            <input type="text" class="form-control " name="preffered_city" placeholder="{{i.Preffered_city}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-4">
+                                        <label style="color:#DC143C;">Min Age </label>
+                                            <select class="selectpicker" data-size="7"
+                                                    data-style="select-with-transition" title="{{i.Partner_agefrom}}"
+                                                    name="age_from">
+                                                    <option value="Any">Any</option>
+                                                <option value="18" >18 yrs</option>
+                                                <option value="19">19 yrs</option>
+                                                <option value="20">20 yrs</option>
+                                                <option value="21">21 yrs</option>
+                                                <option value="22">22 yrs</option>
+                                                <option value="23">23 yrs</option>
+                                                <option value="24" >24 yrs</option>
+                                                <option value="25">25 yrs</option>
+                                                <option value="26">26 yrs</option>
+                                                <option value="27" >27 yrs</option>
+                                                <option value="28">28 yrs</option>
+                                                <option value="29">29 yrs</option>
+                                                <option value="30" >30 yrs</option>
+                                                <option value="31">31 yrs</option>
+                                                <option value="32">32 yrs</option>
+                                                <option value="33" >33 yrs</option>
+                                                <option value="34">34 yrs</option>
+                                                <option value="35">35 yrs</option>
+                                                <option value="36" >36 yrs</option>
+                                                <option value="37">37yrs</option>
+                                                <option value="38">38 yrs</option>
+                                                <option value="39" >39 yrs</option>
+                                                <option value="40">40 yrs</option>
+                                                <option value="41">41 yrs</option>
+                                                <option value="42" >42 yrs</option>
+                                                <option value="43">43 yrs</option>
+                                                <option value="44">44 yrs</option>
+                                                <option value="45" >45 yrs Plus</option>
+                                              </select> 
+                                            
+                                    </div>
+                                            <div class="col-md-4">
+                                            <label style="color:#DC143C;">Max Age</label>
+                                            <select class="selectpicker" data-size="7"
+                                                    data-style="select-with-transition" title="{{i.Partner_ageto}}"
+                                                    name="age_to">
+                                                    <option value="Any">Any</option>
+                                                <option value="18" >18 yrs</option>
+                                                <option value="19">19 yrs</option>
+                                                <option value="20">20 yrs</option>
+                                                <option value="21">21 yrs</option>
+                                                <option value="22">22 yrs</option>
+                                                <option value="23">23 yrs</option>
+                                                <option value="24" >24 yrs</option>
+                                                <option value="25">25 yrs</option>
+                                                <option value="26">26 yrs</option>
+                                                <option value="27" >27 yrs</option>
+                                                <option value="28">28 yrs</option>
+                                                <option value="29">29 yrs</option>
+                                                <option value="30" >30 yrs</option>
+                                                <option value="31">31 yrs</option>
+                                                <option value="32">32 yrs</option>
+                                                <option value="33" >33 yrs</option>
+                                                <option value="34">34 yrs</option>
+                                                <option value="35">35 yrs</option>
+                                                <option value="36" >36 yrs</option>
+                                                <option value="37">37yrs</option>
+                                                <option value="38">38 yrs</option>
+                                                <option value="39" >39 yrs</option>
+                                                <option value="40">40 yrs</option>
+                                                <option value="41">41 yrs</option>
+                                                <option value="42" >42 yrs</option>
+                                                <option value="43">43 yrs</option>
+                                                <option value="44">44 yrs</option>
+                                                <option value="45" >45 yrs Plus</option>
+                                              </select> 
+                                            
+                                            </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Height(Above)</label>
+                                            <select class="selectpicker" data-size="7"
+                                                    data-style="select-with-transition" title="{{i.Partner_height}}"
+                                                    name="partner_height">
+                                                    <option value="Any">Any</option>
+                                                <option value="4.5" >4' 5"(1.35mts)</option>
+                                                <option value="4.6">4' 6"(1.37mts)</option>
+                                                <option value="4.7">4' 7"(1.40mts)</option>
+                                                <option value="4.8">4' 8"(1.42mts)</option>
+                                                <option value="4.9">4' 9"(1.45mts)</option>
+                                                <option value="4.10">4' 10"(1.47mts)</option>
+                                                <option value="4.11">4' 11"(1.50mts)</option>
+                                                <option value="5.0">5' 0"(1.52mts)</option>
+                                                <option value="5.1">5' 1"(1.55mts)</option>
+                                                <option value="5.2">5' 2"(1.58mts)</option>
+                                                <option value="5.3">5' 3"(1.60mts)</option>
+                                                <option value="5.4">5' 4"(1.63mts)</option>
+                                                <option value="5.5">5' 5"(1.65mts)</option>
+                                                <option value="5.6">5' 6"(1.68mts)</option>
+                                                <option value="5.7">5' 7"(1.70mts)</option>
+                                                <option value="5.8">5' 8"(1.73mts)</option>
+                                                <option value="5.9">5' 9"(1.75mts)</option>
+                                                <option value="5.10">5' 10"(1.78mts)</option>
+                                                <option value="5.11">5' 11"(1.80mts)</option>
+                                                <option value="6.0">6' 0"(1.83mts)</option>
+                                                <option value="6.1">6' 1"(1.85mts)</option>
+                                                <option value="6.2">6' 2"(1.88mts)</option>
+                                                <option value="6.3">6' 3"(1.91mts)</option>
+                                                <option value="6.4">6' 4"(1.93mts)</option>
+                                                <option value="6.5">6' 5"(1.96mts)</option>
+                                                <option value="6.6">6' 6"(1.98mts)</option>
+                                                <option value="6.7">6' 7"(2.01mts)</option>
+                                                <option value="6.8">6' 8"(2.03mts)</option>
+                                                <option value="6.9">6' 9"(2.06mts)</option>
+                                                <option value="6.10">6' 10"(2.08mts)</option>
+                                                <option value="6.11">6' 11"(2.11mts)</option>
+                                                <option value="7.0">7' 0"(2.13mts) Plus</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row tp-5">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Partner Annual Icome</label>
+                                            <select class="selectpicker" data-size="7" data-style="select-with-transition" title="{{i.Partner_income}}" name="partner_income">
+                                                <option value="-">-</option>
+                                                <option value="100000-300000">100000-300000</option>
+                                                <option value="300000-500000">300000-500000</option>
+                                                <option value="500000-700000">500000-700000</option>
+                                                <option value="700000-900000">700000-900000</option>
+                                                <option value="900000-1100000">900000-1100000</option>
+                                                <option value="1100000-1300000">1100000-1300000</option>
+                                                <option value="1300000-1500000">1300000-1500000</option>
+                                                <option value="1500000-2000000">1500000-2000000</option>
+                                                <option value="2000000-2500000">2000000-2500000</option>
+                                                <option value="2500000 and above">2500000 and above</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label style="color:#DC143C;">Partner Qualification</label>
+                                                <select class="selectpicker" data-size="5" data-style="select-with-transition" title="{{i.Partner_qualification}}" name="partner_qualification">
+                                                    <option value="Any">Any</option>
+                                                    <option value="Bachelors"> Bachelors</option>
+                                                    <option value="Masters"> Masters </option>
+                                                    <option value="Doctorate">Doctorate</option>
+                                                    <option value="Diploma">Diploma</option>
+                                                    <option value="Undergraduate"> Undergraduate</option>
+                                                    <option value="AssociatesDegree">Associates Degree</option>
+                                                    <option value="Honours Degree">Honours Degree</option>
+                                                    <option value="Trade School"> Trade School</option>
+                                                    <option value="High School">High School</option>
+                                                    <option value="Less Than High School">Less Than High School</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row justify-content-center">
+                                    <button type="submit" class="btn  btn-fill btn-rose btn-wd">Update</button>
+                                </div>
+
+        </div>
+    </div>
+    </form>
+    {% endfor %}
+</div>
+</div>
+</div>
+share fav download
+{% endblock body %}
+{% block js %}
+<!--   Core JS Files   -->
+
+<script>
+$(document).ready(function() {
+    $().ready(function() {
+        $sidebar = $('.sidebar');
+
+        $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+
+        window_width = $(window).width();
+
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+        if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+            if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+                $('.fixed-plugin .dropdown').addClass('open');
+            }
+
+        }
+
+        $('.fixed-plugin a').click(function(event) {
+            // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+            if ($(this).hasClass('switch-trigger')) {
+                if (event.stopPropagation) {
+                    event.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+            }
+        });
+
+        $('.fixed-plugin .active-color span').click(function() {
+            $full_page_background = $('.full-page-background');
+
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+
+            var new_color = $(this).data('color');
+
+            if ($sidebar.length != 0) {
+                $sidebar.attr('data-color', new_color);
+            }
+
+            if ($full_page.length != 0) {
+                $full_page.attr('filter-color', new_color);
+            }
+
+            if ($sidebar_responsive.length != 0) {
+                $sidebar_responsive.attr('data-color', new_color);
+            }
+        });
+
+        $('.fixed-plugin .background-color .badge').click(function() {
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+
+            var new_color = $(this).data('background-color');
+
+            if ($sidebar.length != 0) {
+                $sidebar.attr('data-background-color', new_color);
+            }
+        });
+
+        $('.fixed-plugin .img-holder').click(function() {
+            $full_page_background = $('.full-page-background');
+
+            $(this).parent('li').siblings().removeClass('active');
+            $(this).parent('li').addClass('active');
+
+
+            var new_image = $(this).find("img").attr('src');
+
+            if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                $sidebar_img_container.fadeOut('fast', function() {
+                    $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                    $sidebar_img_container.fadeIn('fast');
+                });
+            }
+
+            if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                $full_page_background.fadeOut('fast', function() {
+                    $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                    $full_page_background.fadeIn('fast');
+                });
+            }
+
+            if ($('.switch-sidebar-image input:checked').length == 0) {
+                var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+                var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+            }
+
+            if ($sidebar_responsive.length != 0) {
+                $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+            }
+        });
+
+        $('.switch-sidebar-image input').change(function() {
+            $full_page_background = $('.full-page-background');
+
+            $input = $(this);
+
+            if ($input.is(':checked')) {
+                if ($sidebar_img_container.length != 0) {
+                    $sidebar_img_container.fadeIn('fast');
+                    $sidebar.attr('data-image', '#');
+                }
+
+                if ($full_page_background.length != 0) {
+                    $full_page_background.fadeIn('fast');
+                    $full_page.attr('data-image', '#');
+                }
+
+                background_image = true;
+            } else {
+                if ($sidebar_img_container.length != 0) {
+                    $sidebar.removeAttr('data-image');
+                    $sidebar_img_container.fadeOut('fast');
+                }
+
+                if ($full_page_background.length != 0) {
+                    $full_page.removeAttr('data-image', '#');
+                    $full_page_background.fadeOut('fast');
+                }
+
+                background_image = false;
+            }
+        });
+
+        $('.switch-sidebar-mini input').change(function() {
+            $body = $('body');
+
+            $input = $(this);
+
+            if (md.misc.sidebar_mini_active == true) {
+                $('body').removeClass('sidebar-mini');
+                md.misc.sidebar_mini_active = false;
+
+                $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+            } else {
+
+                $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+                setTimeout(function() {
+                    $('body').addClass('sidebar-mini');
+
+                    md.misc.sidebar_mini_active = true;
+                }, 300);
+            }
+
+            // we simulate the window Resize so the charts will get updated in realtime.
+            var simulateWindowResize = setInterval(function() {
+                window.dispatchEvent(new Event('resize'));
+            }, 180);
+
+            // we stop the simulation of Window Resize after the animations are completed
+            setTimeout(function() {
+                clearInterval(simulateWindowResize);
+            }, 1000);
+
+        });
+    });
+});
+</script>
+<script>
+$(document).ready(function() {
+    // initialise Datetimepicker and Sliders
+    md.initFormExtendedDatetimepickers();
+    if ($('.slider').length != 0) {
+        md.initSliders();
+    }
+});
+</script>
+<script>
+$(function() {
+    $("#slider-range").slider({
+        range: true,
+        min: 0,
+        max: 500,
+        values: [18, 30],
+        slide: function(event, ui) {
+            $("#Age").val("Age" + ui.values[0] + " - Age" + ui.values[1]);
+        }
+    });
+    $("#Age").val("Age" + $("#slider-range").slider("values", 0) +
+        " - Age" + $("#slider-range").slider("values", 1));
+});
+</script>
+{% endblock %}

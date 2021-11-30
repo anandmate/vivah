@@ -1,0 +1,221 @@
+{% extends 'webapp/header.html' %}
+{% block title %} Register {% endblock %}
+{% block body %}
+{% load static %}
+<style>
+
+.bg-bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.bg-bubbles li {
+  position: absolute;
+  list-style: none;
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.15);
+  bottom: -160px;
+  -webkit-animation: square 25s infinite;
+  animation: square 25s infinite;
+  transition-timing-function: linear;
+}
+.bg-bubbles li:nth-child(1) {
+  left: 10%;
+}
+.bg-bubbles li:nth-child(2) {
+  left: 20%;
+  width: 80px;
+  height: 80px;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+  -webkit-animation-duration: 17s;
+          animation-duration: 17s;
+}
+.bg-bubbles li:nth-child(3) {
+  left: 25%;
+  -webkit-animation-delay: 4s;
+          animation-delay: 4s;
+}
+.bg-bubbles li:nth-child(4) {
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  -webkit-animation-duration: 22s;
+          animation-duration: 22s;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.bg-bubbles li:nth-child(5) {
+  left: 70%;
+}
+.bg-bubbles li:nth-child(6) {
+  left: 80%;
+  width: 120px;
+  height: 120px;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.bg-bubbles li:nth-child(7) {
+  left: 32%;
+  width: 160px;
+  height: 160px;
+  -webkit-animation-delay: 7s;
+          animation-delay: 7s;
+}
+.bg-bubbles li:nth-child(8) {
+  left: 55%;
+  width: 20px;
+  height: 20px;
+  -webkit-animation-delay: 15s;
+          animation-delay: 15s;
+  -webkit-animation-duration: 40s;
+          animation-duration: 40s;
+}
+.bg-bubbles li:nth-child(9) {
+  left: 25%;
+  width: 10px;
+  height: 10px;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+  -webkit-animation-duration: 40s;
+          animation-duration: 40s;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.bg-bubbles li:nth-child(10) {
+  left: 90%;
+  width: 160px;
+  height: 160px;
+  -webkit-animation-delay: 11s;
+          animation-delay: 11s;
+}
+@-webkit-keyframes square {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-700px) rotate(600deg);
+  }
+}
+@keyframes square {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-700px) rotate(600deg);
+  }
+</style>
+<div class="wrapper wrapper-full-page">
+    <div class="page-header register-page header-filter" filter-color="black" style="background-image: url('{% static 'img/register.jpg' %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 ml-auto mr-auto">
+                    <div class="card card-signup">
+                        <h2 class="card-title text-center">Register</h2>
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-rose alert-with-icon tp-5" id="msg" data-notify="container">
+                            <i class="material-icons" data-notify="icon">notifications</i>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="material-icons">close</i>
+                            </button>
+                            <span data-notify="message"> {{ message }}</span>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-6 col-sm-8 ml-auto mr-auto">
+                                    <form class="form" method="POST" action="register">
+                                        <div class="form-group has-default">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="material-icons">face</i>
+                                                    </span>
+                                                </div>
+                                                {% csrf_token %}
+                                                <input type="text" class="form-control" placeholder="First Name..." name="first_name">
+                                                <input type="text" class="form-control" placeholder="Last Name..." name="last_name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-default">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="material-icons">sentiment_satisfied_alt</i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="User Name..." name="username">
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-default">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="material-icons">mail</i>
+                                                    </span>
+                                                </div>
+                                                <input type="email" class="form-control" placeholder="Email..." name="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-default">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="material-icons">lock_outline</i>
+                                                    </span>
+                                                </div>
+                                                <input type="password" placeholder="Password..." class="form-control" name="password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-default">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="material-icons">lock_outline</i>
+                                                    </span>
+                                                </div>
+                                                <input type="password" placeholder="Confirm Password..." class="form-control" name="password2">
+                                            </div>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="" checked="" required>
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                                I agree to the
+                                                <a href="#something">terms and conditions</a>.
+                                            </label>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-round mt-4">Get Started</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+    </div>
+</div>
+        {% endblock body %}

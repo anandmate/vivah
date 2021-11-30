@@ -1,0 +1,128 @@
+{% extends 'webapp/basic.html' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+{% load static %}
+<!-- events display -->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-rose alert-with-icon tp-5" id="msg" data-notify="container">
+    <i class="material-icons" data-notify="icon">notifications</i>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="material-icons">close</i>
+    </button>
+    <span data-notify="message"> {{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+<div class="main">
+    <div class="header text-center mt-5">
+        <h3>Welcome </h3>
+    </div>
+    <div class="container mt-4">
+      <h3 style="color:#660000; font-weight: bold;">Upcoming Events</h3>
+        <div class="row">
+            {% for i in events %}
+            <div class="col-lg-4 col-sm-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <a class="d-block blur-shadow-image">
+                                <img src="{{i.Image.url}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                            </a>
+                        </div>
+                        <h3 class="card-title">Event:-{{i.Name}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">info</i>
+                            <p class="mb-0">
+                                <b>Description:-</b>{{i.Description}}<br><br>
+                            </p>
+                        </div>
+                        <form action="event_enroll" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="eventname" value="{{i.Name}}">
+                            <button class="btn btn-primary btn-round">
+                                <i class="material-icons">touch_app</i> Enroll
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!--end events-->
+    <style>
+        .col-md-3
+          {
+          display: inline-block;
+          margin-left:-4px;
+          }
+
+          .carousel-indicators .active {
+          background-color: blue;
+            }
+
+          .col-md-3 img{
+
+          max-width: 227px;
+          height: 242px;
+          }
+
+          body .carousel-indicator li{
+          background-color: blue;
+          }
+
+          body .carousel-indicators{
+          bottom: 0;
+          }
+
+          body .carousel-control-prev-icon,
+          body .carousel-control-next-icon{
+          background-color: blue;
+          }
+
+          .carousel-control-prev,
+          .carousel-control-next{
+          top: auto;
+bottom: auto;
+          }
+           body .no-padding{
+           padding-left: 0,
+           padding-right: 0;
+           }
+</style>
+    <!--Slideshow starts here -->
+    <div class="container sm mx-3">
+    <div class="main">
+      <h3 style="color:#660000; font-weight: bold;">Recently added members...</h3>
+        <div class="row">
+            {% for i in candidates %}
+            <div class="col-sm-2.8 mx-1">
+                <div class="card card-product">
+                    <div class="card-header card-header-image" data-header-animation="true">
+                        <a href="#pablo">
+                            <img class="img" src="{{i.Profile_pic.url}}" style="width:170px;height:240px;">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions text-center">
+                            <form action="view_profile" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="canview" value="{{i.candidate_id}}">
+                                <button class="btn btn-rose btn-round">View Profile</button>
+                            </form>
+                        </div>
+                        <h6 class="card-category text-gray">Vivah ID- {{i.candidate_id}}</h6>
+                        <h5 class="card-title">Name:-{{ i.Name }}</h5>
+                        <div class="card-description">
+                            D.O.B.:-{{ i.DOB }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div></div>
+    </div>
+    {% endblock body %}
