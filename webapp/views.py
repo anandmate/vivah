@@ -81,7 +81,7 @@ def verify(request, auth_token):
 # verification mail
 def send_mail_after_registration(email, token):
     subject = 'Your account needs to be verified'
-    message = f'Hi click the link to verify your account  http://192.168.1.11:8000/verify/{token}'
+    message = f'Hi click the link to verify your account  https://vivahtest.herokuapp.com/verify/{token}'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail(subject, message, email_from, recipient_list)
@@ -1153,7 +1153,7 @@ def user_approve(request):
 def approval_mail(iemail):
     subject = 'Your Vivah profile is now approved'
     message = f'Hi, Your vivah profile is now approved and active. You can enjoy the site features!' \
-              f'https://vivahmilanapp.herokuapp.com/'
+              f'https://vivahtest.herokuapp.com/'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [iemail]
     send_mail(subject, message, email_from, recipient_list)
