@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, '/vivahtest.herokuapp.com/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/home/vivahtest.herokuapp.com/media')
 
 
 # Password reset and email verification
