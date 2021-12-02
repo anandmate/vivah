@@ -494,12 +494,11 @@ def search(request):
 def can_search(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            user = Candidate.objects.get(user_id=request.user)
             name_id = request.POST.get('name_id')
             approved = Candidate.objects.filter(Approval='Yes')
-            find_one = approved.filter(candidate_id__icontains=name_id).exclude(Gender=user.Gender)
+            find_one = approved.filter(candidate_id__icontains=name_id)
             if len(find_one) == 0:
-                find_two = approved.filter(Name__icontains=name_id).exclude(Gender=user.Gender)
+                find_two = approved.filter(Name__icontains=name_id)
                 if len(find_two) == 0:
                     user = Candidate.objects.get(user_id=request.user)
                     candidates = approved.exclude(Gender=user.Gender)
